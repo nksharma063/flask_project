@@ -41,16 +41,16 @@ def readDirFileLocation(file):
 
 
 def extractdata(file):
-    database,server =  readDirFileLocation(file)
+    database,server =  readDirFileLocation(file)  #Reading content based from previous list result
     #  print(database, server)
     finalDatabaseDict = {}
     finalServerDict = {}
-    with open(database, 'r') as f:
-        for each in f:
+    with open(database, 'r') as f:     
+        for each in f:  # Readinge ach in line from result
             # print(each)
-            if '=' in each:
-                key, value = each.strip().split('=')
-                finalDatabaseDict[key] = value
+            if '=' in each:    #if = is there , we could have replace with any fucntion
+                key, value = each.strip().split('=')  # We are stripping and rmeoving any content and splitting based on special variable
+                finalDatabaseDict[key] = value # appendig the value to dictionary
                 continue
             else:
                 pass 
@@ -71,16 +71,17 @@ def storeDatabase(file):
 
     client = MongoClient('mongodb+srv://nksharma063:Her0V1red%4012345@cluster0.gdlcigy.mongodb.net/')
     db = client['PythonAssignment']
-    database = db['databaseCred']
-    server = db['severCred']
+    database = db['databaseCred']  #creating collection database
+    server = db['severCred']   # creating collection server
 
-    databaseJSON = json.loads(finalDatabaseDict)
+    databaseJSON = json.loads(finalDatabaseDict)  #Loading data in to json format
     serverJSON = json.loads(finalServerDict)
 
-    database.insert_one(databaseJSON)
+    database.insert_one(databaseJSON)  #Inserting the data as json format
     server.insert_one(serverJSON)
 
-    return database
+    return database     # extracting teh data from dict and storing in json format using pymomgo, json and creating object these classes
+
 
 
 app = Flask(__name__)
