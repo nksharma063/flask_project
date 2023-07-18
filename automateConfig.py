@@ -32,6 +32,8 @@ def readDirFileLocation(file):
         for each in Path(path).iterdir():  #two operation found in os module scadr and iterddir fro Path module, tried both, iter module seems to be givig the path with file name to process further.
             if each.is_file() and each.name in file:   #Checking whether the file name and it is file matches
                 result.append(str(each))
+            else:
+                raise "Configuration file not found, please check these two files exist and provide variable input as ['file1.ext', 'file2.ext'] "
             # if each.name == file and each.is_file():
         return result
 # print(readDirFileLocation(['server.yml','database.yml']))
@@ -72,7 +74,7 @@ def getJSON(file):
     client = MongoClient('mongodb+srv://nksharma063:Her0V1red%4012345@cluster0.gdlcigy.mongodb.net/')
     db = client['PythonAssignment']
     database = db['databaseCred']  #creating collection databasecred and itsobject
-    server = db['severCred']   # creating collection server servercre and its object
+    server = db['serverCred']   # creating collection server servercre and its object
 
     databaseJSON = json.dumps(finalDatabaseDict)  #Loading data in to json format
     serverJSON = json.dumps(finalServerDict)
