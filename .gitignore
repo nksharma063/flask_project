@@ -1,3 +1,8 @@
+# Some random unwanted files
+*.cfg
+app.py
+*.html
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
