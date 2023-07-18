@@ -4,7 +4,10 @@ import time
 import json
 from pymongo import MongoClient
 from flask import Flask,jsonify
+from dotenv import load_dotenv
 
+
+load_dotenv()
 # def userDirFile():
 #     path = input("Please enter the path to files: ")
 # #     file = input("Please enter the file names with appropriate extension with comma ")
@@ -32,9 +35,9 @@ def readDirFileLocation(file):
         for each in Path(path).iterdir():  #two operation found in os module scadr and iterddir fro Path module, tried both, iter module seems to be givig the path with file name to process further.
             if each.is_file() and each.name in file:   #Checking whether the file name and it is file matches
                 result.append(str(each))
-            else:
-                raise "Configuration file not found, please check these two files exist and provide variable input as ['file1.ext', 'file2.ext'] "
-            # if each.name == file and each.is_file():
+            # else:
+            #     raise "Configuration file not found, please check these two files exist and provide variable input as ['file1.ext', 'file2.ext'] "
+            # # if each.name == file and each.is_file():
         return result
 # print(readDirFileLocation(['server.yml','database.yml']))
 
@@ -43,8 +46,11 @@ def readDirFileLocation(file):
 
 
 def extractdata(file):
-    database,server =  readDirFileLocation(file)  #Reading content based from previous list result
-    #  print(database, server)
+    try:
+        database, server = readDirFileLocation(file)
+    except: 
+        raise print({f"An error occurred while reading the file:. Please check the name and extension of the file and use http://127.0.0.1:5000/getData/[filename.extension,filename2.extension] format to process both files."})
+             #  print(database, server)
     finalDatabaseDict = {}
     finalServerDict = {}
     with open(database, 'r') as f:     
@@ -69,9 +75,8 @@ def extractdata(file):
 # print(extractdata(['server.yml','database.yml']))
 
 def getJSON(file):
-    finalDatabaseDict, finalServerDict = extractdata(file)
-
-    client = MongoClient('mongodb+srv://nksharma063:Her0V1red%4012345@cluster0.gdlcigy.mongodb.net/')
+    finalDatabaseDict, finalServerDict = extractdata(file)     
+    client = MongoClient(os.environ.get('MONGO_URI'))
     db = client['PythonAssignment']
     database = db['databaseCred']  #creating collection databasecred and itsobject
     server = db['serverCred']   # creating collection server servercre and its object
@@ -84,6 +89,7 @@ def getJSON(file):
 
     return f"Database: \n{databaseJSON} \n Server: \n {serverJSON}"
  
+# print(getJSON(['databas.yml','server.yml']))
 
 # def getData(file):
 #     databaseJSON, serverJSON = getJSON(file)
