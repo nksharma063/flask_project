@@ -64,30 +64,42 @@ def extractdata(file):
             else:
                 pass
     return [finalDatabaseDict, finalServerDict]
-print(extractdata(['server.yml','database.yml']))
+# print(extractdata(['server.yml','database.yml']))
 
-def storeDatabase(file):
+def getJSON(file):
     finalDatabaseDict, finalServerDict = extractdata(file)
 
     client = MongoClient('mongodb+srv://nksharma063:Her0V1red%4012345@cluster0.gdlcigy.mongodb.net/')
     db = client['PythonAssignment']
-    database = db['databaseCred']  #creating collection database
-    server = db['severCred']   # creating collection server
+    database = db['databaseCred']  #creating collection databasecred and itsobject
+    server = db['severCred']   # creating collection server servercre and its object
 
-    databaseJSON = json.loads(finalDatabaseDict)  #Loading data in to json format
-    serverJSON = json.loads(finalServerDict)
+    databaseJSON = json.dumps(finalDatabaseDict)  #Loading data in to json format
+    serverJSON = json.dumps(finalServerDict)
 
-    database.insert_one(databaseJSON)  #Inserting the data as json format
-    server.insert_one(serverJSON)
+    database.insert_one(finalDatabaseDict)  #Inserting the data as json format
+    server.insert_one(finalServerDict)
 
-    return database     # extracting teh data from dict and storing in json format using pymomgo, json and creating object these classes
+    return f"Database: \n{databaseJSON} \n Server: \n {serverJSON}"
+ 
+
+# def getData(file):
+#     databaseJSON, serverJSON = getJSON(file)
+
+#     for key,value in databaseJSON.items():
+#         print(f" {key}:{value}")
+    
+#     for key,value in serverJSON.items():
+#         print(f"{key}:{value}")
 
 
 
-app = Flask(__name__)
-app.route('/')
-def get_data(file):
-    return storeDatabase(file)
+     # extracting teh data from dict and storing in json format using pymomgo, json and creating object these classes
+
+# print(getJSON(['server.yml','database.yml']))
+
+# def get_data(file):
+#     app=Flask(__name__)
 
     
 
