@@ -1,1 +1,5 @@
 Flask==2.3.2
+pathlib==1.0.1
+WMI==1.5.1
+pymongo=4.4.1
+python-dotenv==1.0.0

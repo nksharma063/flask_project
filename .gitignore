@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 #extra testing file
 re.txt
 test.py
+=======
+# Some random unwanted files
+*.cfg
+app.py
+*.html
+>>>>>>> dev
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
