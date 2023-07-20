@@ -1,7 +1,7 @@
-#Python Graded Assignment by Hero DevOps
+# Python Graded Assignment by Hero DevOps
 
  
-##This repo will contain files below questions or problem statement
+## This repo will contain files below questions or problem statement
 ### Implement a Python function called check_password_strength that takes a password string as input.
 
 ●       The function should check the password against the following criteria:
