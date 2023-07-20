@@ -1,3 +1,6 @@
+<html>
+<head> neeraj Kumar </head> 
+<body>
 #Python Graded Assignment by Hero DevOps
 ##This repo will contain files below questions or problem statement
 ### Implement a Python function called check_password_strength that takes a password string as input.
@@ -83,4 +86,5 @@ then we used extracted data in form of dict from <h1>extractdata(file)</h1> whic
 we will get two dircteory location from user using directory fucntion.
 
 Iterate over file using PATH.iter() and check if it matches then will use time methods to add the timestamp to archived file.
-
+</body>
+</html>
