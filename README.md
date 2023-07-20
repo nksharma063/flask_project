@@ -1,7 +1,3 @@
-<html>
-<head><title> neeraj Kumar </title></head> 
-
- <body>
 #Python Graded Assignment by Hero DevOps
 
  
