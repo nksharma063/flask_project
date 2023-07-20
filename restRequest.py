@@ -4,7 +4,7 @@ import json, os
 
 app = Flask(__name__)
 
-client = MongoClient(os.environ.get('MONGO_UR'))
+client = MongoClient(os.environ.get('MONGO_URI'))
 db = client.PythonAssignment
 
 database = db.get_collection('databaseCred')
